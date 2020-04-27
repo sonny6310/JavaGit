@@ -5,13 +5,7 @@ public class HW2 {
 		Cline(7);
 		System.out.println();
 		
-		Prime1(6);
-		System.out.println();
-
-		System.out.println("1이상 100이하 소수 출력");
-		for(int i=1; i<101; i++) {
-			Prime2(i);
-		}
+		Prime();
 	}
 	
 	public static void Csize(int r) {
@@ -23,21 +17,21 @@ public class HW2 {
 		System.out.println("반지름이 "+r+"일 때 원 둘레는 "+size);
 	}
 	
-	public static void Prime1(int k) {
-		if(k<4 && k>0) {
-			System.out.println(k+"는 소수");
-		}else if(k>3 && k%2!=0 && k%3!=0) {
-			System.out.println(k+"는 소수");
-		}else {
-			System.out.println(k+"는 소수가 아니다");
-		}
-	}
-	
-	public static void Prime2(int k) {
-		if(k<4 && k>0) {
-			System.out.println(k);
-		}else if(k>3 && k%2!=0 && k%3!=0) {
-			System.out.println(k);
+	public static void Prime() {
+		int m=0;
+		int l=0;
+		int[] prime=new int[100];
+		for(int i=2; i<100; i++) {
+			for(int j=2; j<i; j++) {
+				if(i%j==0) {
+					m++;
+				}
+			}
+			if(m==0) {
+				prime[l]=i;
+				System.out.println(prime[l]);				
+			}
+			m=0;
 		}
 	}
 }

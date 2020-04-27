@@ -11,7 +11,11 @@ public class HW3 {
 		
 		System.out.println();
 		
-		Binary(10);		
+		Binary(10);
+		System.out.println();
+		Binary(20);
+		System.out.println();
+		Binary(100);
 	}
 	
 	public static int square(int n) {
