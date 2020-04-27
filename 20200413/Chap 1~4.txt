@@ -1,0 +1,27 @@
+ctrl+d : 한줄 삭제
+main 입력 후 ctrl+space ENTER : main 자동완성
+sysout 입력 후 ctrl+space : 출력함수 자동완성
+tab : 들여쓰기
+shift+tab : tab반대
+ctrl+shift+f : 자동정렬
+ctrl+shift+c : 자동주석
+ctrl+alt+down/up방향키 : 줄 복사
+
+Scan 입력 후 ctrl+space 하고
+함수이름 = new Scanner(system.in);
+String 변수 = 함수이름.nextLine();
+      ==    C에서 scanf
+
+
+ctrl+f11 : 실행
+
+------------------------------------
+
+window -> properties -> 'encod'
+-> Workspace -> other:UTF-8,
+
+CSS,HTML,JSP,XML files -> UTF-8
+
+Project -> Resource -> other:MS949
+
+------------------------------------
