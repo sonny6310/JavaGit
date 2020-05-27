@@ -22,7 +22,7 @@ public class Qz3 {
 		psq2[1] = new PersonQz2(10,"가");
 		psq2[2] = new PersonQz2(20,"라마바");
 		
-		Arrays.sort(psq2); // Comparable을 상속받고, 부모클래스의 CompareTo메서드를 오버라이딩하여 age기준으로 오름차순정렬하도록 재정의하였음
+		Arrays.sort(psq2);
 		for (int i = 0; i < psq2.length; i++) {
 			System.out.println("psq2["+i+"].age = "+psq2[i].age);
 			System.out.println("psq2["+i+"].name = "+psq2[i].name);
