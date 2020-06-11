@@ -3,8 +3,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>viewForm</title>
 </head>
-<body>viewForm.jsp
+<body>
 </body>
 </html>

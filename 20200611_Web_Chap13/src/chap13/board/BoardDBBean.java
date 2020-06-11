@@ -11,10 +11,7 @@ public class BoardDBBean {
 	public BoardDBBean() {
 	}
 	
-	public String doA() {
-		return "연결";
-	}
-	
+	// 게시판 정보 DB등록
 	public void insertArticle(BoardDataBean dataBean) {
 		
 	}

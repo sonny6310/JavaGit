@@ -1,14 +1,12 @@
 <%@page import="chap13.board.BoardDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	BoardDBBean gbdb = BoardDBBean.getInstance();
-	// 	out.println(gbdb.doA());
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>writeForm</title>
+
+<!-- 부트스트랩 -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
@@ -21,6 +19,7 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
+<!-- My css -->
 <link rel="stylesheet" href="css/chap13.css" />
 <style>
 body {
@@ -78,6 +77,7 @@ body {
 </body>
 </html>
 <script type="text/javascript">
+	// id가 writeBtn인 버튼 클릭 시 function 작동. function 내용: id="frm"을 submit
 	$("#writeBtn").on("click", function() {
 		$("#frm").submit();
 	})
