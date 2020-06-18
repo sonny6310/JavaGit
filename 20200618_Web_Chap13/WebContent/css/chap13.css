@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+@import
+	url("https://fonts.googleapis.com/css2?family=Amatic+SC&family=Cute+Font&display=swap")
+	;
+
+* {
+	font-family: 'Amatic SC', cursive;
+	font-family: 'Cute Font', cursive;
+}
+
+.chap13-bgColor {
+	background-color: #d9d9d9;
+}
+
+.chap13-border {
+	border: 1px solid #fff;
+}
+
+.chap13-center {
+	text-align: center;
+}
+
+.chap13-right {
+	text-align: right;
+}
+
+.chap13-heightCenter {
+	line-height: 20px;
+}
