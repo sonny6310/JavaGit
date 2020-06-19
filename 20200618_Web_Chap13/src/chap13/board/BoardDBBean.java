@@ -11,6 +11,11 @@ import java.util.List;
 public class BoardDBBean {
 	private static BoardDBBean instance = new BoardDBBean();
 
+	private String sqlserverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	private String sqlserverUrl = "jdbc:sqlserver://192.168.0.200:1433;databasename=jh_20200611";
+	private String sqlserverUser = "sa";
+	private String sqlserverPw = "8765432!";
+
 	// .jsp 페이지에서 DB 연동빈인 BoardDBBean 클래스의 메소드에 접근시 필요
 	public static BoardDBBean getInstance() {
 		return instance;
@@ -36,10 +41,9 @@ public class BoardDBBean {
 		// prepareStatement 생성 conn.prepareStatement();
 		// 실행
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(sqlserverClass);
 			// mysql: 3306, oracle: 1521, sqlserver: 1433
-			conn = DriverManager.getConnection("jdbc:sqlserver://192.168.0.200:1433;databasename=jh_20200611", "sa",
-					"8765432!");
+			conn = DriverManager.getConnection(sqlserverUrl, sqlserverUser, sqlserverPw);
 
 			pstmt = conn.prepareStatement("select max(num) from board");
 			rs = pstmt.executeQuery();
@@ -110,10 +114,9 @@ public class BoardDBBean {
 		int x = 0;
 
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(sqlserverClass);
 			// mysql: 3306, oracle: 1521, sqlserver: 1433
-			conn = DriverManager.getConnection("jdbc:sqlserver://192.168.0.200:1433;databasename=jh_20200611", "sa",
-					"8765432!");
+			conn = DriverManager.getConnection(sqlserverUrl, sqlserverUser, sqlserverPw);
 			pstmt = conn.prepareStatement("select count(*) from board");
 			rs = pstmt.executeQuery();
 
@@ -133,12 +136,12 @@ public class BoardDBBean {
 		ResultSet rs = null;
 		List<BoardDataBean> articleList = null;
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(sqlserverClass);
 			// mysql: 3306, oracle: 1521, sqlserver: 1433
-			conn = DriverManager.getConnection("jdbc:sqlserver://192.168.0.200:1433;databasename=jh_20200611", "sa",
-					"8765432!");
-			pstmt = conn.prepareStatement("select * from board order by num desc, ref desc, re_step asc offset ? rows fetch next ? rows only");
-			pstmt.setInt(1, start-1);
+			conn = DriverManager.getConnection(sqlserverUrl, sqlserverUser, sqlserverPw);
+			pstmt = conn.prepareStatement(
+					"select * from board order by num desc, ref desc, re_step asc offset ? rows fetch next ? rows only");
+			pstmt.setInt(1, start - 1);
 			pstmt.setInt(2, end);
 			rs = pstmt.executeQuery();
 
@@ -192,10 +195,9 @@ public class BoardDBBean {
 		ResultSet rs = null;
 		BoardDataBean dataBean = null;
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName(sqlserverClass);
 			// mysql: 3306, oracle: 1521, sqlserver: 1433
-			conn = DriverManager.getConnection("jdbc:sqlserver://192.168.0.200:1433;databasename=jh_20200611", "sa",
-					"8765432!");
+			conn = DriverManager.getConnection(sqlserverUrl, sqlserverUser, sqlserverPw);
 			pstmt = conn.prepareStatement("update board set readcount=readcount+1 where num=?");
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
@@ -235,6 +237,61 @@ public class BoardDBBean {
 				}
 		}
 		return dataBean;
+	}
+
+	public BoardDataBean selectOne(int num, int pageNum) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(sqlserverClass);
+			// mysql: 3306, oracle: 1521, sqlserver: 1433
+			conn = DriverManager.getConnection(sqlserverUrl, sqlserverUser, sqlserverPw);
+			pstmt = conn.prepareStatement("select * from board where num = ?");
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				BoardDataBean bdb = new BoardDataBean();
+				bdb.setContent(rs.getString("content"));
+				bdb.setEmail(rs.getString("email"));
+				bdb.setIp(rs.getString("ip"));
+				bdb.setNum(rs.getInt("num"));
+				bdb.setPasswd(rs.getString("passwd"));
+				bdb.setRe_level(rs.getInt("re_level"));
+				bdb.setRe_step(rs.getInt("re_step"));
+				bdb.setReadcount(rs.getInt("readcount"));
+				bdb.setRef(rs.getInt("ref"));
+				bdb.setReg_date(rs.getTimestamp("reg_date"));
+				bdb.setSubject(rs.getString("subject"));
+				bdb.setWriter(rs.getString("writer"));
+				return bdb;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void deleteArticle(int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(sqlserverClass);
+			// mysql: 3306, oracle: 1521, sqlserver: 1433
+			conn = DriverManager.getConnection(sqlserverUrl, sqlserverUser, sqlserverPw);
+
+			pstmt = conn.prepareStatement("delete from board where num = ?");
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+
+		}
 	}
 
 }
