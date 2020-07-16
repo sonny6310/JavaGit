@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,5 +14,16 @@
 		메인 안에서 top.jsp와<br /> bottom.jsp를 포함한다.
 	</div>
 	<%@include file="bottom.jsp"%>
+	
+	<h2>MyServlet에서 받아옴</h2>
+	<% 
+		String requestAttribute = (String)request.getAttribute("a");
+		String sessionAttribute = (String)session.getAttribute("b");
+	%>
+	requestAttribute = <%=requestAttribute %><br/>
+	sessionAttribute = <%=sessionAttribute %><br/>
+	requestAttribute (jstl/el) = ${a}<br/>
+	sessionAttribute (jstl/el) = ${b}
+	</div>
 </body>
 </html>
