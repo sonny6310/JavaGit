@@ -1,0 +1,31 @@
+	<!-- java 모드 -->
+	<h2>java:</h2>
+	<%@ page import="java.util.List"%>
+	<%
+		List<String> list = (List) request.getAttribute("list");
+		for (String temp : list) {
+			out.println("temp = " + temp);
+		}
+	%>
+	
+	<!-- jstl 모드 -->
+	<h2>jstl:</h2>
+	<%-- ${list} --%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<c:forEach items="${list}" var="temp">
+		<%-- 		temp = <c:out value="${temp}" /> --%>
+		temp = ${temp}
+		<br />
+	</c:forEach>
+
+	<!-- 주소값에 ?a=a 같이 get/post방식으로 값 받았을 때 -->
+	<!-- java 모드 -->
+	<h2>java:</h2>
+	<%
+		String paramA = request.getParameter("a");
+		out.println(paramA);
+	%>
+
+	<!-- jstl 모드 -->
+	<h2>jstl:</h2>
+	${param.a}
