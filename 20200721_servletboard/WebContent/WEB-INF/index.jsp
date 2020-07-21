@@ -1,10 +1,32 @@
+<%@page import="com.org.freeboard.FreeBoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	int number = 10;
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Index</title>
 <%@ include file="../resources/cssjs/head.jsp"%>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#insert").on("click", function() {
+			window.location = "insert.ws";
+		});
+		$(".dto").on("click", function() {
+			var idx = $(this).find("input").val();
+			window.location = "update.ws?idx=" + idx;
+		});
+		$(".td_ck").on("click", function(e) {
+			e.stopPropagation();
+			$(this).find("input").attr("checked", true);
+		});
+		$("#delete").on("click", function(e) {
+			$("#frm").submit();
+		});
+	});
+</script>
 <style>
 .dto:hover {
 	background-color: lime;
@@ -15,7 +37,7 @@
 <body>
 	<div class="container">
 		<form action="delete.ws" id="frm">
-			<div class="row" style="height: 550px;">
+			<div class="row">
 				<table class="table">
 					<tr>
 						<th></th>
@@ -31,7 +53,7 @@
 							<td class="td_ck">
 								<input type="checkbox" name="idx" value="${dto.idx}">
 							</td>
-							<td>${dto.idx}</td>
+							<td><%=number--%></td>
 							<td>${dto.title}</td>
 							<td>${dto.content}</td>
 							<td>${dto.reg_date}</td>
@@ -41,28 +63,8 @@
 				</table>
 			</div>
 		</form>
-		<div class="row">
-			<button id="insert" class="btn-primary">글쓰기</button>
-			<button id="delete" class="btn-primary">삭제</button>
-			<script type="text/javascript">
-				$(document).ready(function() {
-					$("#insert").on("click", function() {
-						window.location = "insert.ws";
-					});
-					$(".dto").on("click", function() {
-						var idx = $(this).find("input").val();
-						window.location = "update.ws?idx=" + idx;
-					});
-					$(".td_ck").on("click", function(e) {
-						e.stopPropagation();
-						$(this).find("input").attr("checked",true);
-					});
-					$("#delete").on("click",function(e){
-						$("#frm").submit();
-					});
-				});
-			</script>
-		</div>
+		<button id="insert" class="btn-primary">글쓰기</button>
+		<button id="delete" class="btn-primary">삭제</button>
 	</div>
 </body>
 </html>
