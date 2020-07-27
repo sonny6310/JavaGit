@@ -1,5 +1,6 @@
 package com.file;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -111,7 +112,7 @@ public class FileBoardDAO {
 	public void deleteFileBoard(String[] cks) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-
+		ResultSet rs = null;
 		String deleteIdxs = "";
 
 		for (int i = 0; i < cks.length; i++) {
@@ -124,12 +125,27 @@ public class FileBoardDAO {
 
 		try {
 			conn = getConnection();
+			pstmt = conn.prepareStatement("select filename from fileboard where idx in(" + deleteIdxs + ");");
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				do {
+					String savePath = CVALUES.filepath;
+					String fileName = rs.getString("filename");
+					File file = new File(savePath, fileName);
+
+					if (file.exists()) {
+						file.delete();
+					}
+				} while (rs.next());
+			}
+			
 			pstmt = conn.prepareStatement("delete from fileboard where idx in(" + deleteIdxs + ");");
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			doClose(null, pstmt, conn);
+			doClose(rs, pstmt, conn);
 		}
 	}
 

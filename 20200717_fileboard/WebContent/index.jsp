@@ -1,10 +1,15 @@
-<%@page import="java.util.List"%>
+<%@page import="com.file.CVALUES"%>
+<%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.file.FileBoardDAO"%>
 <%@ page import="com.file.FileBoardDTO"%>
 <%
 	FileBoardDAO dao = FileBoardDAO.getInstance();
 	List<FileBoardDTO> list = dao.selectAllFileBoard();
+
+	String filepath = application.getRealPath("/upload/");
+	
+	CVALUES.filepath = filepath;
 %>
 <!DOCTYPE html>
 <html>
@@ -45,7 +50,7 @@
 		</div>
 	</form>
 	<div style="margin-top: 50px;">
-		<form action="deletePro.jsp" method="post">
+		<form action="deletePro.jsp" method="get">
 			<table border="1">
 				<tr>
 					<th></th>
@@ -55,15 +60,17 @@
 					<th>file</th>
 				</tr>
 				<%
-					for (int i = 0; i < list.size(); i++) {
-						FileBoardDTO dto = list.get(i);
-						out.println("<tr class=\"row\">");
-						out.println("<td><input type=\"checkbox\" name=\"ck\" value=\"" + dto.getIdx() + "\"/></td>");
-						out.println("<td>" + dto.getIdx() + "</td>");
-						out.println("<td>" + dto.getTitle() + "</td>");
-						out.println("<td>" + dto.getContent() + "</td>");
-						out.println("<td>" + dto.getFilename() + "</td>");
-						out.println("</tr>");
+					if (!(list == null)) {
+						for (int i = 0; i < list.size(); i++) {
+							FileBoardDTO dto = list.get(i);
+							out.println("<tr class=\"row\">");
+							out.println("<td><input type=\"checkbox\" name=\"ck\" value=\"" + dto.getIdx() + "\"/></td>");
+							out.println("<td>" + dto.getIdx() + "</td>");
+							out.println("<td>" + dto.getTitle() + "</td>");
+							out.println("<td>" + dto.getContent() + "</td>");
+							out.println("<td >" + dto.getFilename() + "</td>");
+							out.println("</tr>");
+						}
 					}
 				%>
 			</table>
