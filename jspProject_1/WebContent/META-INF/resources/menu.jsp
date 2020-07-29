@@ -10,7 +10,7 @@
 	</ul>
 	<ul class="actions stacked">
 		<%
-			if (true) {
+			if (session.getAttribute("signedUser") == null) {
 		%>
 		<li><a href="login.ws" class="button fit">로그인</a></li>
 		<li><a href="signup.ws" class="button fit">회원가입</a></li>
