@@ -67,25 +67,41 @@ public class Servlet extends HttpServlet {
 
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그아웃 완료.'); window.location = \"index.ws\";</script>");
+			out.println("<script>alert('로그아웃 완료'); window.location = \"index.ws\";</script>");
 			out.flush();
 			out.close();
 		} else if (url.equals("/signupPro.ws")) {
 			try {
 				request.setCharacterEncoding("UTF-8");
-				MemberDTO mDTO = new MemberDTO(request.getParameter("id"), request.getParameter("pw"),
-						request.getParameter("name"), request.getParameter("email"));
-				int x = mDAO.regist(mDTO);
+				String id = request.getParameter("id");
+				String pw = request.getParameter("pw");
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				int x = 1;
+
+				if (id.equals("") || id.isEmpty() || id == null) {
+					x = 0;
+				} else if (pw.equals("") || pw.isEmpty() || pw == null) {
+					x = 0;
+				} else if (name.equals("") || name.isEmpty() || name == null) {
+					x = 0;
+				} else if (email.equals("") || email.isEmpty() || email == null) {
+					x = 0;
+				} else {
+					MemberDTO mDTO = new MemberDTO(id, pw, name, email);
+					x = mDAO.regist(mDTO);
+				}
+
 				if (x == 1) {
 					response.setContentType("text/html;charset=utf-8");
 					PrintWriter out = response.getWriter();
-					out.println("<script>alert('회원가입 완료.'); window.location = \"index.ws\";</script>");
+					out.println("<script>alert('회원가입 완료'); window.location = \"index.ws\";</script>");
 					out.flush();
 					out.close();
 				} else {
 					response.setContentType("text/html;charset=utf-8");
 					PrintWriter out = response.getWriter();
-					out.println("<script>alert('회원가입에 실패하였습니다.'); history.go(-1); </script>");
+					out.println("<script>alert('회원가입에 실패하였습니다'); history.go(-1); </script>");
 					out.flush();
 					out.close();
 				}
@@ -104,19 +120,23 @@ public class Servlet extends HttpServlet {
 
 					response.setContentType("text/html;charset=utf-8");
 					PrintWriter out = response.getWriter();
-					out.println("<script>alert('로그인 완료.'); window.location = \"index.ws\";</script>");
+					out.println("<script>alert('로그인 완료'); window.location = \"index.ws\";</script>");
 					out.flush();
 					out.close();
 				} else {
 					response.setContentType("text/html;charset=utf-8");
 					PrintWriter out = response.getWriter();
-					out.println("<script>alert('로그인에 실패하였습니다.'); history.go(-1); </script>");
+					out.println("<script>alert('로그인에 실패하였습니다'); history.go(-1); </script>");
 					out.flush();
 					out.close();
 				}
 			} catch (Exception e) {
 
 			}
+		} else if (url.equals("/checkID.ws")) {
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/checkID.jsp");
+			rd.forward(request, response);
+			
 		}
 	}
 

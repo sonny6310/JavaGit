@@ -48,17 +48,17 @@
 		<!-- Contact -->
 		<section id="contact">
 			<form method="post" action="loginPro.ws">
-				<div class="inner" style="width: 800px; text-align: center; margin-left: auto; margin-right: auto;">
-					<div class="fields">
+				<div class="inner">
+					<div class="fields" style="width: 50%; margin-left: 30%;">
 						<div class="field half">
-							<label for="id">아이디</label> <input type="text" name="id" id="id" />
+							<label for="id">아이디</label> <input style="width: 90%;" type="text" name="id" id="id" />
 						</div>
 						<div class="field half">
-							<label for="pw">비밀번호</label> <input type="password" name="pw" id="pw" />
+							<label for="pw">비밀번호</label> <input style="width: 90%;" type="password" name="pw" id="pw" />
 						</div>
-					</div>
-					<div style="margin-top: 17px;">
-						<input type="submit" value="로그인" class="primary" />
+						<div style="margin-top: 17px;">
+							<input type="submit" value="로그인" class="primary" />
+						</div>
 					</div>
 				</div>
 			</form>

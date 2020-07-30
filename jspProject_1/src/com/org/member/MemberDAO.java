@@ -60,4 +60,26 @@ public class MemberDAO {
 			DataSource.doClose(rs, pstmt, conn);
 		}
 	}
+
+	public int idCheck(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int x = 0;
+
+		try {
+			conn = DataSource.getConnection();
+			pstmt = conn.prepareStatement("select * from CloudMember where id=?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+
+			if (!rs.next()) {
+				x = 1;
+			}
+		} catch (Exception e) {
+		} finally {
+			DataSource.doClose(rs, pstmt, conn);
+		}
+		return x;
+	}
 }
