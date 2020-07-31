@@ -30,7 +30,7 @@ public class Servlet extends HttpServlet {
 		StringBuffer a = request.getRequestURL();
 		String url = a.toString();
 		url = url.substring(url.lastIndexOf("/"));
-
+		
 		if (url.equals("/index.ws")) {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/index.jsp");
 			rd.forward(request, response);
@@ -45,12 +45,6 @@ public class Servlet extends HttpServlet {
 			rd.forward(request, response);
 		} else if (url.equals("/checkLogin1.ws")) {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/checkLogin1.jsp");
-			rd.forward(request, response);
-		} else if (url.equals("/checkLogin2.ws")) {
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/checkLogin2.jsp");
-			rd.forward(request, response);
-		} else if (url.equals("/checkLogin2.ws")) {
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/checkLogin2.jsp");
 			rd.forward(request, response);
 		} else if (url.equals("/checkLogin2.ws")) {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/checkLogin2.jsp");
@@ -136,7 +130,9 @@ public class Servlet extends HttpServlet {
 		} else if (url.equals("/checkID.ws")) {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/checkID.jsp");
 			rd.forward(request, response);
-			
+		} else if (url.equals("/uploadPro.ws")) {
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/uploadPro.jsp");
+			rd.forward(request, response);
 		}
 	}
 

@@ -7,8 +7,8 @@
 </head>
 <script type="text/javascript">
 	if (<%=session.getAttribute("signedUser") == null%>) {
-		alert("로그인 후 이용하시오.");
-		window.location = "index.ws";
+		alert("로그인 후 이용가능합니다");
+		window.location = "login.ws";
 	} else {
 		window.location = "mycloud.ws";
 	}

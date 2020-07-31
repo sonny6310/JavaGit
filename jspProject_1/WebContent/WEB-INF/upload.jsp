@@ -14,6 +14,60 @@
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
+<style>
+.file_input label {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	-moz-transition: background-color 0.2s ease-in-out, box-shadow 0.2s
+		ease-in-out, color 0.2s ease-in-out;
+	-webkit-transition: background-color 0.2s ease-in-out, box-shadow 0.2s
+		ease-in-out, color 0.2s ease-in-out;
+	-ms-transition: background-color 0.2s ease-in-out, box-shadow 0.2s
+		ease-in-out, color 0.2s ease-in-out;
+	transition: background-color 0.2s ease-in-out, box-shadow 0.2s
+		ease-in-out, color 0.2s ease-in-out;
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: inset 0 0 0 2px #ffffff;
+	color: #ffffff;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 0.8em;
+	font-weight: 600;
+	height: 3.5em;
+	letter-spacing: 0.25em;
+	line-height: 3.5em;
+	padding: 0 1.75em;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	white-space: nowrap;
+	width: 9em;
+}
+
+.file_input label:hover, .file_input label:active {
+	box-shadow: inset 0 0 0 2px #9bf1ff;
+	color: #9bf1ff;
+	background-color: rgba(155, 241, 255, 0.1);
+	box-shadow: inset 0 0 0 2px #53e3fb;
+	color: #53e3fb;
+}
+
+.file_input label input {
+	position: absolute;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+
+.file_input input[type=text] {
+	vertical-align: middle;
+	display: inline;
+}
+</style>
 </head>
 <body class="is-preload">
 
@@ -41,139 +95,36 @@
 				<header class="major">
 					<h1>파일 업로드</h1>
 				</header>
-				<div class="content">
-					<p>
-						Lorem ipsum dolor sit amet nullam consequat<br /> sed veroeros. tempus adipiscing nulla.
-					</p>
-				</div>
 			</div>
 		</section>
 
-		<!-- Main -->
-		<div id="main">
-
-			<!-- One -->
-			<section id="one">
-				<div class="inner">
-					<header class="major">
-						<h2>Sed amet aliquam</h2>
-					</header>
-					<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna.</p>
-				</div>
-			</section>
-
-			<!-- Two -->
-			<section id="two" class="spotlights">
-				<section>
-					<a href="generic.html" class="image"> <img src="images/pic08.jpg" alt="" data-position="center center" />
-					</a>
-					<div class="content">
-						<div class="inner">
-							<header class="major">
-								<h3>Orci maecenas</h3>
-							</header>
-							<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
-							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn more</a></li>
-							</ul>
-						</div>
-					</div>
-				</section>
-				<section>
-					<a href="generic.html" class="image"> <img src="images/pic09.jpg" alt="" data-position="top center" />
-					</a>
-					<div class="content">
-						<div class="inner">
-							<header class="major">
-								<h3>Rhoncus magna</h3>
-							</header>
-							<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
-							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn more</a></li>
-							</ul>
-						</div>
-					</div>
-				</section>
-				<section>
-					<a href="generic.html" class="image"> <img src="images/pic10.jpg" alt="" data-position="25% 25%" />
-					</a>
-					<div class="content">
-						<div class="inner">
-							<header class="major">
-								<h3>Sed nunc ligula</h3>
-							</header>
-							<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
-							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn more</a></li>
-							</ul>
-						</div>
-					</div>
-				</section>
-			</section>
-
-			<!-- Three -->
-			<section id="three">
-				<div class="inner">
-					<header class="major">
-						<h2>Massa libero</h2>
-					</header>
-					<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet pharetra et feugiat tempus.</p>
-					<ul class="actions">
-						<li><a href="generic.html" class="button next">Get Started</a></li>
-					</ul>
-				</div>
-			</section>
-
-		</div>
+		<br />
 
 		<!-- Contact -->
 		<section id="contact">
-			<div class="inner">
-				<section>
-					<form method="post" action="#">
-						<div class="fields">
-							<div class="field half">
-								<label for="name">Name</label> <input type="text" name="name" id="name" />
-							</div>
-							<div class="field half">
-								<label for="email">Email</label> <input type="text" name="email" id="email" />
-							</div>
-							<div class="field">
-								<label for="message">Message</label>
-								<textarea name="message" id="message" rows="6"></textarea>
+			<form action="uploadPro.ws" method="post" enctype="multipart/form-data">
+				<div class="inner">
+					<div class="fields" style="width: 50%; margin-left: 30%;">
+						<div class="field">
+							<label class="test" for="title">제목</label> <input style="width: 90%;" type="text" name="title" id="title" autocomplete="off" />
+						</div>
+						<div class="field">
+							<label class="test" for="file">파일 첨부 (10MB 이하)</label>
+							<div class="file_input">
+								<label> 파일선택 <input type="file" name="file" id="file" onchange="javascript:document.getElementById('file_route').value=this.value.split('\\')[this.value.split('\\').length-1]">
+								</label> <input style="width: calc(90% - 7.4em);" type="text" readonly="readonly" title="File Route" name="file_route" id="file_route">
 							</div>
 						</div>
-						<ul class="actions">
-							<li><input type="submit" value="Send Message" class="primary" /></li>
-							<li><input type="reset" value="Clear" /></li>
-						</ul>
-					</form>
-				</section>
-				<section class="split">
-					<section>
-						<div class="contact-method">
-							<span class="icon solid alt fa-envelope"></span>
-							<h3>Email</h3>
-							<a href="#">information@untitled.tld</a>
+						<div class="field">
+							<label for="content">내용</label>
+							<textarea style="width: 90%" name="content" id="content" rows="6" autocomplete="off"></textarea>
 						</div>
-					</section>
-					<section>
-						<div class="contact-method">
-							<span class="icon solid alt fa-phone"></span>
-							<h3>Phone</h3>
-							<span>(000) 000-0000 x12387</span>
+						<div style="margin-top: 17px;">
+							<input id="submit" type="submit" value="업로드" class="primary" /> <input type="reset" value="리셋" />
 						</div>
-					</section>
-					<section>
-						<div class="contact-method">
-							<span class="icon solid alt fa-home"></span>
-							<h3>Address</h3>
-							<span>1234 Somewhere Road #5432<br /> Nashville, TN 00000<br /> United States of America
-							</span>
-						</div>
-					</section>
-				</section>
-			</div>
+					</div>
+				</div>
+			</form>
 		</section>
 
 		<!-- Footer -->

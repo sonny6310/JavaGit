@@ -17,14 +17,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#submit").attr("disabled", true);
 		$("#id").on("blur", function() {
 			var id = $("#id").val();
 			if(id.length < 7){
 				$("#id_check").text("아이디는 7자 이상이어야 합니다.");
 				$("#id_check").css("color", "salmon");
 				$("#id_check").css("margin-left", "25%");
-				$("#submit").attr("disabled", true);
 			}else{
 				$.ajax({
 					type : "get",
@@ -34,12 +32,10 @@
 							$("#id_check").text("사용가능한 아이디입니다.");
 							$("#id_check").css("color", "skyblue");
 							$("#id_check").css("margin-left", "28%");
-							$("#submit").attr("disabled", false);
 						} else {
 							$("#id_check").text("불가능한 아이디입니다.");
 							$("#id_check").css("color", "salmon");
 							$("#id_check").css("margin-left", "29%");
-							$("#submit").attr("disabled", true);
 						}
 					}
 				});
@@ -52,10 +48,10 @@
 				$("#pw_check").text("비밀번호는 8자 이상이어야 합니다.");
 				$("#pw_check").css("color", "salmon");
 				$("#pw_check").css("margin-left", "23%");
-				$("#submit").attr("disabled", true);
 			} else{
-				$("#pw_check").text("");
-				$("#submit").attr("disabled", false);
+				$("#pw_check").text("OK");
+				$("#pw_check").css("color", "skyblue");
+				$("#pw_check").css("margin-left", "41%");
 			}
 		});
 		
@@ -65,12 +61,27 @@
 				$("#name_check").text("이름은 2~5글자여야 합니다.");
 				$("#name_check").css("color", "salmon");
 				$("#name_check").css("margin-left", "27%");
-				$("#submit").attr("disabled", true);
 			} else {
-				$("#name_check").text("");
-				$("#submit").attr("disabled", false);
+				$("#name_check").text("OK");
+				$("#name_check").css("color", "skyblue");
+				$("#name_check").css("margin-left", "41%");
 			}
 		});
+		
+		$("#submit").on("click", function(){
+			$("#submit").attr("type", "button");
+			if( $("#id_check").text().trim() == "사용가능한 아이디입니다." && $("#pw_check").text().trim() == "OK" && $("#name_check").text().trim() == "OK" && $("#email").val() != "") {
+				$("#submit").attr("type", "submit");
+			} else if($("#id_check").text().trim() != "사용가능한 아이디입니다."){
+				$("#id").focus();
+			} else if($("#pw_check").text().trim() != "OK"){
+				$("#pw").focus();
+			} else if($("#name_check").text().trim() != "OK"){
+				$("#name").focus();
+			} else if($("#email").val().trim() == ""){
+				$("#email").focus();
+			}
+		})	
 	});
 </script>
 </head>
@@ -105,26 +116,26 @@
 
 		<!-- Contact -->
 		<section id="contact">
-			<form method="post" action="signupPro.ws">
+			<form name="signupForm" method="post" action="signupPro.ws">
 				<div class="inner">
 					<div class="fields" style="width: 50%; margin-left: 30%;">
 						<div class="field">
-							<label class="test" for="id">아이디</label> <input style="width: 90%;" type="text" name="id" id="id" />
+							<label class="test" for="id">아이디</label> <input style="width: 90%;" type="text" name="id" id="id" autocomplete="off"/>
 							<div id="id_check"></div>
 						</div>
 						<div class="field">
-							<label for="pw">비밀번호</label> <input style="width: 90%;" type="password" name="pw" id="pw" />
+							<label for="pw">비밀번호</label> <input style="width: 90%;" type="password" name="pw" id="pw" autocomplete="off"/>
 							<div id="pw_check"></div>
 						</div>
 						<div class="field">
-							<label for="name">이름</label> <input style="width: 90%;" type="text" name="name" id="name" />
+							<label for="name">이름</label> <input style="width: 90%;" type="text" name="name" id="name" autocomplete="off"/>
 							<div id="name_check"></div>
 						</div>
 						<div class="field">
-							<label for="email">Email</label> <input style="width: 90%;" type="text" name="email" id="email" />
+							<label for="email">Email</label> <input style="width: 90%;" type="text" name="email" id="email" autocomplete="off"/>
 						</div>
 						<div style="margin-top: 17px;">
-							<input id="submit" type="submit" value="가입" class="primary" /> <input type="reset" value="리셋" />
+							<input id="submit" type="button" value="가입" class="primary" /> <input type="reset" value="리셋" />
 						</div>
 					</div>
 				</div>

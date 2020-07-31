@@ -51,10 +51,10 @@
 				<div class="inner">
 					<div class="fields" style="width: 50%; margin-left: 30%;">
 						<div class="field half">
-							<label for="id">아이디</label> <input style="width: 90%;" type="text" name="id" id="id" />
+							<label for="id">아이디</label> <input style="width: 90%;" type="text" name="id" id="id" autocomplete="off"/>
 						</div>
 						<div class="field half">
-							<label for="pw">비밀번호</label> <input style="width: 90%;" type="password" name="pw" id="pw" />
+							<label for="pw">비밀번호</label> <input style="width: 90%;" type="password" name="pw" id="pw" autocomplete="off"/>
 						</div>
 						<div style="margin-top: 17px;">
 							<input type="submit" value="로그인" class="primary" />
