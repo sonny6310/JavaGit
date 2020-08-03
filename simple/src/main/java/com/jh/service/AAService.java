@@ -10,16 +10,19 @@ import com.jh.dto.AADTO;
 
 @Service
 public class AAService {
-	
+
 	@Autowired
 	AADAO aaDAO;
-	
-	public void join() {
-		aaDAO.insert();
-		aaDAO.select();
+
+	public void insert(String bb) {
+		aaDAO.insert(bb);
 	}
 
 	public List<AADTO> selectAll() {
 		return aaDAO.select();
+	}
+
+	public void update(AADTO aaDTO) {
+		aaDAO.update(aaDTO);
 	}
 }

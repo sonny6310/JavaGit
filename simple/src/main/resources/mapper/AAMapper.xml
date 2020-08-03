@@ -6,4 +6,19 @@
 	<select id="getaa" resultType="com.jh.dto.AADTO">
 		select * from aa
 	</select>
+
+	<insert id="insertaa" parameterType="com.jh.dto.AADTO">
+		insert into aa(bb) values
+		(#{bb})
+	</insert>
+
+	<update id="updateaa" parameterType="com.jh.dto.AADTO">
+		update aa set bb=#{bb}
+		where
+		aa=#{aa}
+	</update>
+
+	<delete id="deleteallaa">
+		delete from aa;
+	</delete>
 </mapper>
