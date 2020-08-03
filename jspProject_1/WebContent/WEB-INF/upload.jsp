@@ -117,7 +117,7 @@
 						</div>
 						<div class="field">
 							<label for="content">내용</label>
-							<textarea style="width: 90%" name="content" id="content" rows="6" autocomplete="off"></textarea>
+							<textarea style="width: 90%; resize: none;" name="content" id="content" rows="6" autocomplete="off"></textarea>
 						</div>
 						<div style="margin-top: 17px;">
 							<input id="submit" type="submit" value="업로드" class="primary" /> <input type="reset" value="리셋" />

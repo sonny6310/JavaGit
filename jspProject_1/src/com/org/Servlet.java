@@ -2,6 +2,7 @@ package com.org;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.org.cloud.CloudDAO;
+import com.org.cloud.CloudDTO;
 import com.org.member.MemberDAO;
 import com.org.member.MemberDTO;
 
@@ -19,6 +22,7 @@ public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	MemberDAO mDAO = MemberDAO.getInstance();
+	CloudDAO cDAO = CloudDAO.getInstance();
 
 	public Servlet() {
 		super();
@@ -41,6 +45,34 @@ public class Servlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/upload.jsp");
 			rd.forward(request, response);
 		} else if (url.equals("/mycloud.ws")) {
+			String pageNum = request.getParameter("pageNum");
+			if (pageNum == null) {
+				pageNum = "1";
+			}
+			
+			int ipageNum = Integer.parseInt(pageNum) * 5 - 4;
+			int lpageNum = ipageNum + 4;
+			
+			HttpSession session = request.getSession();
+			String id = (String)session.getAttribute("signedUser");
+			
+			int pageCount = cDAO.selectPageCount(id);
+			request.setAttribute("pageCount", pageCount);
+			
+			int textNum = cDAO.selectTextCount(id);
+			request.setAttribute("textNum", textNum);
+			
+			int textCount = cDAO.selectTextCount(id);
+			for (int i = 1; i <= pageCount; i++) {
+				if(Integer.parseInt(pageNum) == i) {
+					request.setAttribute("textCount", textCount-5*(i-1));		
+				}
+			}
+			
+			// jstl 서블릿으로
+			List<CloudDTO> list = cDAO.selectAll(id, ipageNum, lpageNum);
+			request.setAttribute("list", list);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/mycloud.jsp");
 			rd.forward(request, response);
 		} else if (url.equals("/checkLogin1.ws")) {
@@ -111,7 +143,7 @@ public class Servlet extends HttpServlet {
 				if (x == 1) {
 					HttpSession session = request.getSession();
 					session.setAttribute("signedUser", id);
-
+					
 					response.setContentType("text/html;charset=utf-8");
 					PrintWriter out = response.getWriter();
 					out.println("<script>alert('로그인 완료'); window.location = \"index.ws\";</script>");
@@ -132,6 +164,12 @@ public class Servlet extends HttpServlet {
 			rd.forward(request, response);
 		} else if (url.equals("/uploadPro.ws")) {
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/uploadPro.jsp");
+			rd.forward(request, response);
+		} else if (url.equals("/content.ws")) {
+			CloudDTO cDTO = cDAO.selectOne(request.getParameter("reg_date"));
+			request.setAttribute("cDTO", cDTO);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/content.jsp");
 			rd.forward(request, response);
 		}
 	}

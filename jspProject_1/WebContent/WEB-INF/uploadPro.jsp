@@ -23,23 +23,18 @@
 	MultipartRequest mr = new MultipartRequest(request, filepath, 1024 * 1024 * 10, //10MB
 			"utf-8", new DefaultFileRenamePolicy());
 
-	Enumeration<?> params = mr.getParameterNames();
+	// 	Enumeration<?> params = mr.getParameterNames();
 
-	while (params.hasMoreElements()) {
-		String name = (String) params.nextElement();
-		String value = mr.getParameter(name);
+	// 	while (params.hasMoreElements()) {
+	// 		String name = (String) params.nextElement();
+	// 		String value = mr.getParameter(name);
 
-		out.println("name = " + name + " value = " + value + "<br/>");
-	}
-
-	out.println("---------------------------------<br/>");
-
+	// 		out.println("name = " + name + " value = " + value + "<br/>");
+	// 	}
 	Enumeration<?> files = mr.getFileNames();
 	while (files.hasMoreElements()) {
 		String name = (String) files.nextElement();
 		String filename = mr.getFilesystemName(name);
-		String original = mr.getOriginalFileName(name);
-		String type = mr.getContentType(name);
 		File file = mr.getFile(name);
 
 		cDTO.setId(id);
@@ -47,21 +42,23 @@
 		cDTO.setTitle(mr.getParameter("title"));
 		cDTO.setContent(mr.getParameter("content"));
 
-		out.println("아이디: " + id + "<br/>");
-		out.println("파일명: " + filename + "<br/>");
-		out.println("제목: " + mr.getParameter("title") + "<br/>");
-		out.println("내용: " + mr.getParameter("content") + "<br/>");
-
 		if (file != null) {
-			out.println("파일 크기: " + (file.length() / 1024) / 1024 + "." + (file.length() / 1024) % 1024
-					+ "MB<br/>");
 			cDTO.setFilesize((file.length() / 1024) / 1024 + "." + (file.length() / 1024) % 1024 + "MB");
 		}
 	}
 
 	CloudDAO cDAO = CloudDAO.getInstance();
 
-	cDAO.insert(cDTO);
+	int x = cDAO.insert(cDTO);
 
-	response.sendRedirect("mycloud.ws");
+	if (x == 1) {
+		response.sendRedirect("mycloud.ws");
+	} else {
+%>
+<script>
+	alert('업로드에 실패하였습니다');
+	history.go(-1);
+</script>
+<%
+	}
 %>

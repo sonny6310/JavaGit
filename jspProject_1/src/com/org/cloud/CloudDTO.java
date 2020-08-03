@@ -6,14 +6,15 @@ public class CloudDTO {
 	private String content;
 	private String filename;
 	private String filesize;
+	private String reg_date;
 
-	public CloudDTO(String id, String title, String content, String filename, String filesize) {
+	public CloudDTO(String title, String content, String filename, String filesize, String reg_date) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.filename = filename;
 		this.filesize = filesize;
+		this.reg_date = reg_date;
 	}
 
 	public CloudDTO() {
@@ -26,6 +27,14 @@ public class CloudDTO {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getReg_date() {
+		return reg_date;
+	}
+
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 
 	public String getTitle() {

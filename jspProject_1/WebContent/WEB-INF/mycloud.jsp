@@ -1,4 +1,14 @@
+<%@page import="com.org.value.ConValues"%>
+<%@page import="java.util.List"%>
+<%@page import="com.org.cloud.CloudDAO"%>
+<%@page import="com.org.cloud.CloudDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	// 	CloudDAO cDAO = CloudDAO.getInstance();
+
+	List<CloudDTO> list = (List<CloudDTO>) request.getAttribute("list");
+	int textCount = (int) request.getAttribute("textCount");
+%>
 <!DOCTYPE HTML>
 <!--
 	Forty by HTML5 UP
@@ -14,6 +24,41 @@
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
+<style>
+div.inner {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+h3.title:hover {
+	background-color: #e7b788;
+	cursor: pointer;
+}
+</style>
+
+<!-- jquery쓰려면 필요 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".title").on("click", function() {
+			var i = $(this).attr("id");
+			var reg_date = $(".rd" + i).text();
+			window.location = "content.ws?reg_date="+reg_date;
+		});
+
+		$(".del").on("click", function() {
+			var i = $(this).attr("id");
+			alert("i" + i);
+		});
+
+		$(".upd").on("click", function() {
+			var i = $(this).attr("id");
+			alert("i" + i);
+		});
+	});
+</script>
 </head>
 <body class="is-preload">
 
@@ -41,11 +86,6 @@
 				<header class="major">
 					<h1>내 클라우드</h1>
 				</header>
-				<div class="content">
-					<p>
-						Lorem ipsum dolor sit amet nullam consequat<br /> sed veroeros. tempus adipiscing nulla.
-					</p>
-				</div>
 			</div>
 		</section>
 
@@ -56,125 +96,50 @@
 			<section id="one">
 				<div class="inner">
 					<header class="major">
-						<h2>Sed amet aliquam</h2>
+						<h2>업로드 목록</h2>
 					</header>
-					<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna.</p>
 				</div>
 			</section>
 
 			<!-- Two -->
-			<section id="two" class="spotlights">
-				<section>
-					<a href="generic.html" class="image"> <img src="images/pic08.jpg" alt="" data-position="center center" />
-					</a>
-					<div class="content">
-						<div class="inner">
-							<header class="major">
-								<h3>Orci maecenas</h3>
-							</header>
-							<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
-							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn more</a></li>
-							</ul>
-						</div>
+			<form>
+				<section id="two" class="spotlights">
+					<%
+						if (!(list == null)) {
+							for (int i = 0; i < list.size(); i++) {
+								CloudDTO cDTO = list.get(i);
+								out.println("<section>");
+								out.println("<div class=\"content\">");
+								out.println("<div class=\"inner\">");
+								out.println("<header class=\"major\">");
+								out.println("<h3 class=\"title\" id=\"" + i + "\">" + cDTO.getTitle() + "</h3>");
+								out.println("</header><table>");
+								out.println("<tr><td>첨부파일 : </td><td class=\"fn" + i + "\">" + cDTO.getFilename() + "</td></tr>");
+								out.println("<tr><td>용량 : </td><td class=\"fs" + i + "\">" + cDTO.getFilesize() + "</td></tr>");
+								out.println("<tr><td>내용 : </td><td class=\"ct" + i + "\">" + cDTO.getContent() + "</td></tr>");
+								out.println("<tr><td>최종 수정일 : </td><td class=\"rd" + i + "\">" + cDTO.getReg_date() + "</td></tr>");
+								out.println("</table>");
+					%>
+					<div style="margin-bottom: 2em;">
+						<input type="button" value="삭제" class="del" id="<%=i%>"> <input type="button" value="수정" class="upd" id="<%=i%>">
 					</div>
+					<%
+						out.println("</div></div></section>");
+							}
+						}
+					%>
 				</section>
-				<section>
-					<a href="generic.html" class="image"> <img src="images/pic09.jpg" alt="" data-position="top center" />
-					</a>
-					<div class="content">
-						<div class="inner">
-							<header class="major">
-								<h3>Rhoncus magna</h3>
-							</header>
-							<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
-							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn more</a></li>
-							</ul>
-						</div>
-					</div>
-				</section>
-				<section>
-					<a href="generic.html" class="image"> <img src="images/pic10.jpg" alt="" data-position="25% 25%" />
-					</a>
-					<div class="content">
-						<div class="inner">
-							<header class="major">
-								<h3>Sed nunc ligula</h3>
-							</header>
-							<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
-							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn more</a></li>
-							</ul>
-						</div>
-					</div>
-				</section>
-			</section>
-
-			<!-- Three -->
-			<section id="three">
-				<div class="inner">
-					<header class="major">
-						<h2>Massa libero</h2>
-					</header>
-					<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet pharetra et feugiat tempus.</p>
-					<ul class="actions">
-						<li><a href="generic.html" class="button next">Get Started</a></li>
-					</ul>
-				</div>
-			</section>
-
-		</div>
-
-		<!-- Contact -->
-		<section id="contact">
-			<div class="inner">
-				<section>
-					<form method="post" action="#">
-						<div class="fields">
-							<div class="field half">
-								<label for="name">Name</label> <input type="text" name="name" id="name" />
-							</div>
-							<div class="field half">
-								<label for="email">Email</label> <input type="text" name="email" id="email" />
-							</div>
-							<div class="field">
-								<label for="message">Message</label>
-								<textarea name="message" id="message" rows="6"></textarea>
-							</div>
-						</div>
-						<ul class="actions">
-							<li><input type="submit" value="Send Message" class="primary" /></li>
-							<li><input type="reset" value="Clear" /></li>
-						</ul>
-					</form>
-				</section>
-				<section class="split">
-					<section>
-						<div class="contact-method">
-							<span class="icon solid alt fa-envelope"></span>
-							<h3>Email</h3>
-							<a href="#">information@untitled.tld</a>
-						</div>
-					</section>
-					<section>
-						<div class="contact-method">
-							<span class="icon solid alt fa-phone"></span>
-							<h3>Phone</h3>
-							<span>(000) 000-0000 x12387</span>
-						</div>
-					</section>
-					<section>
-						<div class="contact-method">
-							<span class="icon solid alt fa-home"></span>
-							<h3>Address</h3>
-							<span>1234 Somewhere Road #5432<br /> Nashville, TN 00000<br /> United States of America
-							</span>
-						</div>
-					</section>
-				</section>
+			</form>
+			<div style="text-align: right; margin-right: 3em;">
+				<a href="upload.ws" class="button">파일 업로드</a>
 			</div>
-		</section>
+			<div style="text-align: center;">
+				<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+				<c:forEach begin="1" end="${pageCount}" var="i">
+					[<a href="mycloud.ws?pageNum=${i}">${i}</a>]
+				</c:forEach>
+			</div>
+		</div>
 
 		<!-- Footer -->
 		<%@ include file="../META-INF/resources/footer.jsp"%>
