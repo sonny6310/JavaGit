@@ -14,6 +14,18 @@
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function checkSize(input) {
+		if (input.files && input.files[0].size > (10 * 1024 * 1024)) {
+			alert("파일 사이즈가 업로드 최대 용량(10MB)을 초과하였습니다");
+			input.value = null;
+		} else {
+			document.getElementById('file_route').value = input.value
+					.split('\\')[input.value.split('\\').length - 1];
+		}
+	}
+</script>
 <style>
 .file_input label {
 	-moz-appearance: none;
@@ -105,13 +117,14 @@
 			<form action="uploadPro.ws" method="post" enctype="multipart/form-data">
 				<div class="inner">
 					<div class="fields" style="width: 50%; margin-left: 30%;">
+						<div class="error">${inserterror }${uploaderror }</div>
 						<div class="field">
 							<label class="test" for="title">제목</label> <input style="width: 90%;" type="text" name="title" id="title" autocomplete="off" />
 						</div>
 						<div class="field">
 							<label class="test" for="file">파일 첨부 (10MB 이하)</label>
 							<div class="file_input">
-								<label> 파일선택 <input type="file" name="file" id="file" onchange="javascript:document.getElementById('file_route').value=this.value.split('\\')[this.value.split('\\').length-1]">
+								<label> 파일선택 <input type="file" name="file" id="file" onchange="checkSize(this)">
 								</label> <input style="width: calc(90% - 7.4em);" type="text" readonly="readonly" title="File Route" name="file_route" id="file_route">
 							</div>
 						</div>

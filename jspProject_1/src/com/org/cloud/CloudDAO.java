@@ -56,23 +56,22 @@ public class CloudDAO {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(
-					"insert into CloudBoard(id,title,content,filename,filesize,reg_date) values (?,?,?,?,?,getdate());");
+					"insert into CloudBoard(id,title,content,filename,filesize,reg_date,upload_date) values (?,?,?,?,?,getdate(),?);");
 			pstmt.setString(1, cDTO.getId());
 			pstmt.setString(2, cDTO.getTitle());
 			pstmt.setString(3, cDTO.getContent());
 			pstmt.setString(4, cDTO.getFilename());
 			pstmt.setString(5, cDTO.getFilesize());
+			pstmt.setString(6, cDTO.getUpload_date());
 			pstmt.executeUpdate();
 
 			x = 1;
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			x = 0;
 		} finally {
 			doClose(null, pstmt, conn);
 		}
-
 		return x;
 	}
 
@@ -96,7 +95,7 @@ public class CloudDAO {
 				cDTOlist = new ArrayList<CloudDTO>();
 				do {
 					cDTOlist.add(new CloudDTO(rs.getString("title"), rs.getString("content"), rs.getString("filename"),
-							rs.getString("filesize"), rs.getString("reg_date")));
+							rs.getString("filesize"), rs.getString("reg_date"), rs.getString("upload_date")));
 				} while (rs.next());
 			}
 		} catch (Exception e) {
@@ -157,7 +156,7 @@ public class CloudDAO {
 
 			if (rs.next()) {
 				cDTO = new CloudDTO(rs.getString("title"), rs.getString("content"), rs.getString("filename"),
-						rs.getString("filesize"), rs.getString("reg_date"));
+						rs.getString("filesize"), rs.getString("reg_date"), rs.getString("upload_date"));
 			}
 
 		} catch (Exception e) {

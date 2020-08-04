@@ -48,21 +48,31 @@
 
 		<!-- Contact -->
 		<section id="contact">
-			<form action="uploadPro.ws" method="post" enctype="multipart/form-data">
+			<form method="post" name="form">
 				<div class="inner">
 					<div class="fields" style="width: 50%; margin-left: 30%;">
 						<div class="field">
-							<label class="test" for="title">제목</label> <input style="width: 90%;" type="text" name="title" id="title" value="${cDTO.title }"autocomplete="off" disabled/>
+							<label class="test" for="title">제목</label> <input style="width: 90%;" type="text" name="title" id="title" value="${cDTO.title }" autocomplete="off" disabled />
 						</div>
 						<div class="field">
-							<label class="test" for="title">첨부파일</label> <input style="width: 90%;" type="text" name="title" id="title" value="${cDTO.filename }"autocomplete="off" disabled />
+							<label class="test" for="title">첨부파일</label> <input style="width: 90%;" type="text" name="filename" id="" filename"" value="${cDTO.filename }" autocomplete="off" disabled />
 						</div>
 						<div class="field">
-							<label class="test" for="title">파일크기</label> <input style="width: 90%;" type="text" name="title" id="title" value="${cDTO.filesize }"autocomplete="off" disabled/>
+							<label class="test" for="title">파일크기</label> <input style="width: 90%;" type="text" name="filesize" id="filesize" value="${cDTO.filesize }" autocomplete="off" disabled />
+						</div>
+						<div class="field">
+							<label class="test" for="title">업로드 날짜</label> <input style="width: 90%;" type="text" name="upload_date" id="upload_date" value="${cDTO.upload_date }" autocomplete="off" disabled />
+						</div>
+						<div class="field">
+							<label class="test" for="title">최종 수정일</label> <input style="width: 90%;" type="text" name="reg_date" id="reg_date" value="${cDTO.reg_date }" autocomplete="off" disabled />
 						</div>
 						<div class="field">
 							<label for="content">내용</label>
 							<textarea style="width: 90%; resize: none;" name="content" id="content" rows="6" autocomplete="off" disabled>${cDTO.content }</textarea>
+						</div>
+						<div class="field" style="width: 90%;">
+							<input type="submit" value="수정" class="update" onclick="javascript: form.action='update.ws'">
+							<input style="float: right;" type="submit" value="삭제" class="delete" onclick="javascript: form.action='deletePro.ws'">
 						</div>
 					</div>
 				</div>

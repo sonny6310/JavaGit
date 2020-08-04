@@ -59,16 +59,6 @@ public class Servlet extends HttpServlet {
 			int pageCount = cDAO.selectPageCount(id);
 			request.setAttribute("pageCount", pageCount);
 			
-			int textNum = cDAO.selectTextCount(id);
-			request.setAttribute("textNum", textNum);
-			
-			int textCount = cDAO.selectTextCount(id);
-			for (int i = 1; i <= pageCount; i++) {
-				if(Integer.parseInt(pageNum) == i) {
-					request.setAttribute("textCount", textCount-5*(i-1));		
-				}
-			}
-			
 			// jstl 서블릿으로
 			List<CloudDTO> list = cDAO.selectAll(id, ipageNum, lpageNum);
 			request.setAttribute("list", list);
@@ -171,7 +161,16 @@ public class Servlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/content.jsp");
 			rd.forward(request, response);
-		}
+		} else if (url.equals("/download.ws")) {
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/download.jsp");
+			rd.forward(request, response);
+		} else if (url.equals("/deletePro.ws")) {
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/deletePro.jsp");
+			rd.forward(request, response);
+		} else if (url.equals("/update.ws")) {
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/update.jsp");
+			rd.forward(request, response);
+		} 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
