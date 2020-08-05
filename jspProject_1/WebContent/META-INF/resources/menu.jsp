@@ -3,8 +3,8 @@
 <nav id="menu">
 	<ul class="links">
 		<li><a href="index.ws">홈</a></li>
-		<li><a href="checkLogin1.ws">파일 업로드</a></li>
-		<li><a href="checkLogin2.ws">내 클라우드</a></li>
+		<li><a href="upload.ws">파일 업로드</a></li>
+		<li><a href="mycloud.ws">내 클라우드</a></li>
 		<!-- 				<li><a href="generic.ws">Generic</a></li> -->
 		<!-- 				<li><a href="elements.ws">Elements</a></li> -->
 	</ul>

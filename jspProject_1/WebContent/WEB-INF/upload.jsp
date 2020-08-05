@@ -16,6 +16,12 @@
 </noscript>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+	if (<%=session.getAttribute("signedUser") == null%>) {
+		alert("로그인 후 이용가능합니다");
+		window.location = "login.ws";
+	} 
+</script>
+<script type="text/javascript">
 	function checkSize(input) {
 		if (input.files && input.files[0].size > (10 * 1024 * 1024)) {
 			alert("파일 사이즈가 업로드 최대 용량(10MB)을 초과하였습니다");

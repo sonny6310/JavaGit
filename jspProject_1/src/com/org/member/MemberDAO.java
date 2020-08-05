@@ -27,13 +27,13 @@ public class MemberDAO {
 			pstmt.setString(4, mDTO.getEmail());
 			pstmt.executeUpdate();
 			x = 1;
-			return x;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return x;
 		} finally {
 			DataSource.doClose(null, pstmt, conn);
 		}
+		return x;
 	}
 
 	public int login(String id, String pw) {
@@ -53,12 +53,12 @@ public class MemberDAO {
 			if (passwd.equals(pw)) {
 				x = 1;
 			}
-			return x;
 		} catch (Exception e) {
 			return x;
 		} finally {
 			DataSource.doClose(rs, pstmt, conn);
 		}
+		return x;
 	}
 
 	public int idCheck(String id) {
@@ -77,6 +77,7 @@ public class MemberDAO {
 				x = 1;
 			}
 		} catch (Exception e) {
+			return x;
 		} finally {
 			DataSource.doClose(rs, pstmt, conn);
 		}

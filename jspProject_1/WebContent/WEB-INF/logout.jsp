@@ -1,19 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <script type="text/javascript">
 	if (<%=session.getAttribute("signedUser") == null%>) {
-		alert("로그인 후 이용가능합니다");
+		alert("로그인 되어있지 않습니다");
 		window.location = "login.ws";
 	} else {
-		window.location = "mycloud.ws";
+		<%
+			session.invalidate();
+		%>
+		alert("로그아웃 완료");
+		window.location = "index.ws";
 	}
 </script>
-<body>
-
-</body>
-</html>

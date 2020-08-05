@@ -7,13 +7,19 @@
 -->
 <html>
 <head>
-<title>파일 내용</title>
+<title>글 읽기</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
+<script type="text/javascript">
+	if (<%=session.getAttribute("signedUser") == null%>) {
+		alert("로그인 후 이용가능합니다");
+		window.location = "login.ws";
+	} 
+</script>
 </head>
 <body class="is-preload">
 
@@ -52,27 +58,26 @@
 				<div class="inner">
 					<div class="fields" style="width: 50%; margin-left: 30%;">
 						<div class="field">
-							<label class="test" for="title">제목</label> <input style="width: 90%;" type="text" name="title" id="title" value="${cDTO.title }" autocomplete="off" disabled />
+							<label class="test" for="title">제목</label> <input style="width: 90%;" type="text" name="title" id="title" value="${cDTO.title }" autocomplete="off" readonly />
+						</div>
+						<div class="fiWeld">
+							<label class="test" for="filename">첨부파일</label> <input style="width: 90%;" type="text" name="filename" id="filename" value="${cDTO.filename }" autocomplete="off" readonly />
 						</div>
 						<div class="field">
-							<label class="test" for="title">첨부파일</label> <input style="width: 90%;" type="text" name="filename" id="" filename"" value="${cDTO.filename }" autocomplete="off" disabled />
+							<label class="test" for="filesize">파일크기</label> <input style="width: 90%;" type="text" name="filesize" id="filesize" value="${cDTO.filesize }" autocomplete="off" readonly />
 						</div>
 						<div class="field">
-							<label class="test" for="title">파일크기</label> <input style="width: 90%;" type="text" name="filesize" id="filesize" value="${cDTO.filesize }" autocomplete="off" disabled />
+							<label class="test" for="upload_date">업로드 날짜</label> <input style="width: 90%;" type="text" name="upload_date" id="upload_date" value="${cDTO.upload_date }" autocomplete="off" readonly />
 						</div>
 						<div class="field">
-							<label class="test" for="title">업로드 날짜</label> <input style="width: 90%;" type="text" name="upload_date" id="upload_date" value="${cDTO.upload_date }" autocomplete="off" disabled />
-						</div>
-						<div class="field">
-							<label class="test" for="title">최종 수정일</label> <input style="width: 90%;" type="text" name="reg_date" id="reg_date" value="${cDTO.reg_date }" autocomplete="off" disabled />
+							<label class="test" for="reg_date">최종 수정일</label> <input style="width: 90%;" type="text" name="reg_date" id="reg_date" value="${cDTO.reg_date }" autocomplete="off" readonly />
 						</div>
 						<div class="field">
 							<label for="content">내용</label>
-							<textarea style="width: 90%; resize: none;" name="content" id="content" rows="6" autocomplete="off" disabled>${cDTO.content }</textarea>
+							<textarea style="width: 90%; resize: none;" name="content" id="content" rows="6" autocomplete="off" readonly>${cDTO.content }</textarea>
 						</div>
 						<div class="field" style="width: 90%;">
-							<input type="submit" value="수정" class="update" onclick="javascript: form.action='update.ws'">
-							<input style="float: right;" type="submit" value="삭제" class="delete" onclick="javascript: form.action='deletePro.ws'">
+							<input type="button" value="뒤로" class="back primary" onclick="history.go(-1); return false;"> <input style="float: right; margin-left: 1em;" type="button" value="삭제" class="delete" onclick="javascript: var check=confirm('정말로 삭제하시겠습니까?'); if(check==true){form.action='deletePro.ws'; submit();}"> <input style="float: right;" type="submit" value="수정" class="update" onclick="javascript: form.action='update.ws'">
 						</div>
 					</div>
 				</div>

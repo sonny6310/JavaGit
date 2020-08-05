@@ -56,7 +56,7 @@
 					</span>
 					<header class="major">
 						<h3>
-							<a href="checkLogin1.ws" class="link">파일 업로드</a>
+							<a href="upload.ws" class="link">파일 업로드</a>
 						</h3>
 					</header>
 				</article>
@@ -75,7 +75,7 @@
 					</span>
 					<header class="major">
 						<h3>
-							<a href="checkLogin2.ws" class="link">내 클라우드</a>
+							<a href="mycloud.ws" class="link">내 클라우드</a>
 						</h3>
 					</header>
 				</article>

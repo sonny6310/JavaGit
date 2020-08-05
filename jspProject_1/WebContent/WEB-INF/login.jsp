@@ -7,13 +7,19 @@
 -->
 <html>
 <head>
-<title>회원가입</title>
+<title>로그인</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
+<script type="text/javascript">
+	if (<%=session.getAttribute("signedUser") != null%>) {
+		alert("이미 로그인 중 입니다");
+		window.location = "index.ws";
+	} 
+</script>
 </head>
 <body class="is-preload">
 

@@ -8,7 +8,12 @@
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<script type="text/javascript">
+	if (<%=session.getAttribute("signedUser") == null%>) {
+		alert("로그인 후 이용가능합니다");
+		window.location = "login.ws";
+	} 
+</script>
 <!-- D:\2020java\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\현재 프로젝트명\upload : 저장되는 경로 -->
 <%
 	String id = (String) session.getAttribute("signedUser");
@@ -68,7 +73,7 @@
 			response.sendRedirect("mycloud.ws");
 		} else {
 			out.println("<script>alert('업로드 실패 : 작성 오류');history.back();</script>");
-			// 파일경로랑 파일이름으로, 업로드된 파일 삭제 메소드 추가예정
+			cDAO.deleteFile(filepath, filename);
 		}
 	} catch (Exception e) {
 		e.printStackTrace();

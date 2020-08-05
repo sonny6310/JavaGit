@@ -1,5 +1,6 @@
 package com.org.cloud;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -166,5 +167,79 @@ public class CloudDAO {
 		}
 
 		return cDTO;
+	}
+
+	public void deleteFile(String savePath, String filename) {
+		File file = new File(savePath, filename);
+		if (file.exists()) {
+			file.delete();
+		}
+	}
+
+	public int deleteCloudBoard(String title, String reg_date, String realpath) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String savePath = "";
+		String filename = "";
+		int x = 0;
+
+		try {
+			conn = getConnection();
+			pstmt = conn
+					.prepareStatement("select id,upload_date,filename from CloudBoard where title=? and reg_date=?");
+			pstmt.setString(1, title);
+			pstmt.setString(2, reg_date);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				do {
+					savePath = realpath + rs.getString("id") + "/" + rs.getString("upload_date") + "/";
+					filename = rs.getString("filename");
+				} while (rs.next());
+			}
+
+			pstmt = conn.prepareStatement("delete from CloudBoard where title=? and reg_date=?");
+			pstmt.setString(1, title);
+			pstmt.setString(2, reg_date);
+			pstmt.executeUpdate();
+
+			deleteFile(savePath, filename);
+
+			x = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return x;
+		} finally {
+			doClose(rs, pstmt, conn);
+		}
+
+		return x;
+	}
+
+	public int updateCloudBoard(String title, String content, String filename, String upload_date, String reg_date) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int x = 0;
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(
+					"update CloudBoard set title = ?, content = ?, reg_date = getdate() where reg_date = ? and upload_date = ? and filename = ?");
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setString(3, reg_date);
+			pstmt.setString(4, upload_date);
+			pstmt.setString(5, filename);
+			pstmt.executeUpdate();
+
+			x = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			doClose(null, pstmt, conn);
+		}
+
+		return x;
 	}
 }

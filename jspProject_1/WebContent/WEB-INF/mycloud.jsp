@@ -36,7 +36,12 @@ h3.title:hover {
 
 <!-- jquery쓰려면 필요 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<script type="text/javascript">
+	if (<%=session.getAttribute("signedUser") == null%>) {
+		alert("로그인 후 이용가능합니다");
+		window.location = "login.ws";
+	} 
+</script>
 <script type="text/javascript">
 	$(document).ready(
 			function() {
