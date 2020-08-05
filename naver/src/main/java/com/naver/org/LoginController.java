@@ -18,9 +18,9 @@ import com.naver.org.login.NaverLoginBO;
 
 @Controller
 public class LoginController {
-	
+
 //	https://beam307.github.io/2017/11/28/naverlogin/
-	
+
 	@Autowired
 	NaverLoginBO naverLoginBO;
 
@@ -46,7 +46,7 @@ public class LoginController {
 		vo = json.changeJson(apiResult); // vo에 userEmail, userGender, userNaver 저장
 
 //		if (service.selectNaver(vo) > 0) { // 세션만들기
-			session.setAttribute("login", vo);
+		session.setAttribute("login", vo);
 //		} else {
 //			service.insertNaver(vo);
 //			session.setAttribute("login", vo);

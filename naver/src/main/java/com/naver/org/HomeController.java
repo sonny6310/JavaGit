@@ -31,10 +31,10 @@ public class HomeController {
 
 		return "Kids/Kids";
 	}
-	
+
 	@RequestMapping(value = "/man2.ws", method = RequestMethod.GET)
 	public String man2(Locale locale, Model model, HttpSession session) {
-		
+
 		return "man/man2";
 	}
 
@@ -55,10 +55,18 @@ public class HomeController {
 
 		return "women/women";
 	}
-	
+
 	@RequestMapping(value = "/login.ws", method = RequestMethod.GET)
 	public String login(Locale locale, Model model, HttpSession session) {
-		
+
 		return "login/login";
+	}
+
+	@RequestMapping(value = "/logout.ws", method = RequestMethod.GET)
+	public String logout(Locale locale, Model model, HttpSession session) {
+
+		session.invalidate();
+
+		return "login/logout";
 	}
 }
