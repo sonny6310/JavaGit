@@ -15,7 +15,7 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 	$(document).ready(function() {
-		$('#' + href).addClass('active');
+		$('li#' + href).addClass('active');
 	});
 </script>
 <header style="margin-bottom: -1.4em;">
@@ -25,7 +25,6 @@
 				<a class="navbar-brand" href="home.ws">Spring CRUD 연습</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li id="home"><a href="home.ws">Home</a></li>
 				<li id="select"><a href="select.ws">Select</a></li>
 				<li id="insert"><a href="insert.ws">Insert</a></li>
 				<li id="update"><a href="update.ws">Update</a></li>
@@ -38,7 +37,9 @@
 		</div>
 	</nav>
 </header>
-<div class="jumbotron">
-	<h2>Spring MySQL, MyBatis CRUD 연습하기</h2>
-	<p>select insert update delete</p>
+<div class="container">
+	<div class="jumbotron">
+		<h2>Spring MySQL, MyBatis CRUD 연습하기</h2>
+		<p>select insert update delete</p>
+	</div>
 </div>

@@ -7,14 +7,17 @@ public class boardDTO {
 	private String reg_date;
 	private String mod_date;
 
-//	public boardDTO(int id, String title, String content, String reg_date, String mod_date) {
-//		super();
-//		this.id = id;
-//		this.title = title;
-//		this.content = content;
-//		this.reg_date = reg_date;
-//		this.mod_date = mod_date;
-//	}
+	public boardDTO(int id, String title, String content, String reg_date, String mod_date) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.reg_date = reg_date;
+		this.mod_date = mod_date;
+	}
+
+	public boardDTO() {
+	}
 
 	public int getId() {
 		return id;
