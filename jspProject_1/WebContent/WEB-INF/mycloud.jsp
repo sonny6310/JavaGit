@@ -37,10 +37,12 @@ h3.title:hover {
 <!-- jquery쓰려면 필요 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-	if (<%=session.getAttribute("signedUser") == null%>) {
+	if (
+<%=session.getAttribute("signedUser") == null%>
+	) {
 		alert("로그인 후 이용가능합니다");
 		window.location = "login.ws";
-	} 
+	}
 </script>
 <script type="text/javascript">
 	$(document).ready(
@@ -62,6 +64,9 @@ h3.title:hover {
 							window.location = "download.ws?filename="
 									+ filename + "&upload_date=" + upload_date;
 						});
+				
+				var pgN = '<%=request.getAttribute("pageNum")%>';
+				$(".page" + pgN).css("color", "gray");
 			})
 </script>
 </head>
@@ -123,8 +128,8 @@ h3.title:hover {
 								out.println("<tr><td>용량 : </td><td class=\"fs" + i + "\">" + cDTO.getFilesize() + "</td></tr>");
 								out.println("<tr class=\"trrd\"><td>최종 수정일 : </td><td class=\"rd" + i + "\">" + cDTO.getReg_date()
 										+ "</td></tr>");
-								out.println("<tr><td>업로드 날짜 : </td><td class=\"ud" + i + "\">"
-										+ cDTO.getUpload_date() + "</td></tr>");
+								out.println(
+										"<tr><td>업로드 날짜 : </td><td class=\"ud" + i + "\">" + cDTO.getUpload_date() + "</td></tr>");
 								out.println("</table>");
 					%>
 					<div style="margin-bottom: 2em;">
@@ -148,7 +153,7 @@ h3.title:hover {
 			<div style="text-align: center;">
 				<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 				<c:forEach begin="1" end="${pageCount}" var="i">
-					[<a href="mycloud.ws?pageNum=${i}">${i}</a>]
+					<a id="pg${i}" class="page${i}" href="mycloud.ws?pageNum=${i}">[${i}]</a>
 				</c:forEach>
 			</div>
 		</div>

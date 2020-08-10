@@ -55,6 +55,7 @@ public class Servlet extends HttpServlet {
 
 			int pageCount = cDAO.selectPageCount(id);
 			request.setAttribute("pageCount", pageCount);
+			request.setAttribute("pageNum", pageNum);
 
 			// jstl 서블릿으로
 			List<CloudDTO> list = cDAO.selectAll(id, ipageNum, lpageNum);
