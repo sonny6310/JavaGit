@@ -20,6 +20,11 @@ public class boardDAO {
 		List<boardDTO> list = sqlSession.selectList("board.selectBoard");
 		return list;
 	}
+	
+	public List<boardDTO> selectOne(int id){
+		List<boardDTO> list = sqlSession.selectList("board.selectBoardOne", id);
+		return list;
+	}
 
 	public void delete(int id) {
 		sqlSession.delete("board.deleteBoard", id);

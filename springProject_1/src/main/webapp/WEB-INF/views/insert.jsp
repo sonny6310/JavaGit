@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Insert</title>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -18,7 +18,7 @@
 			</div>
 			<br />
 			<div>
-				<input type="submit" value="저장">
+				<input type="submit" class="btn btn-default delete" value="저장" />
 			</div>
 		</form>
 	</div>

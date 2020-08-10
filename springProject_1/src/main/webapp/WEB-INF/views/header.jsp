@@ -27,8 +27,6 @@
 			<ul class="nav navbar-nav">
 				<li id="select"><a href="select.ws">Select</a></li>
 				<li id="insert"><a href="insert.ws">Insert</a></li>
-				<li id="update"><a href="update.ws">Update</a></li>
-				<li id="delete"><a href="delete.ws">Delete</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

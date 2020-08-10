@@ -4,7 +4,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Select</title>
+<style>
+tr.board:hover {
+	background-color: #e6e6e6;
+}
+</style>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("tr.board").on("click", function() {
+			var id = $(this).attr("id");
+			window.location.href = "content.ws?id=" + id;
+		});
+	})
+</script>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -21,7 +35,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${list}" var="boardDTO">
-					<tr>
+					<tr class="board" id="${boardDTO.id }">
 						<td>${boardDTO.id}</td>
 						<td>${boardDTO.title}</td>
 						<td>${boardDTO.content}</td>

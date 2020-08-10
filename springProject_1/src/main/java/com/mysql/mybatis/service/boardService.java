@@ -18,6 +18,10 @@ public class boardService {
 		return bdao.select();
 	}
 	
+	public List<boardDTO> selectOne(int id){
+		return bdao.selectOne(id);
+	}
+	
 	public void insert(boardDTO bdto) {
 		bdao.insert(bdto);
 	}

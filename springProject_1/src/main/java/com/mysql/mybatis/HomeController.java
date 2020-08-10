@@ -52,13 +52,8 @@ public class HomeController {
 	public String insertpost(Locale locale, Model model, boardDTO bdto) {
 		bservice.insert(bdto);
 		System.out.println(bdto);
+
 		return "redirect:select.ws";
-	}
-
-	@RequestMapping(value = "/update.ws", method = RequestMethod.GET)
-	public String update(Locale locale, Model model) {
-
-		return "update";
 	}
 
 	@RequestMapping(value = "/update.ws", method = RequestMethod.POST)
@@ -66,12 +61,6 @@ public class HomeController {
 		bservice.update(bdto);
 
 		return "redirect:select.ws";
-	}
-
-	@RequestMapping(value = "/delete.ws", method = RequestMethod.GET)
-	public String delete(Locale locale, Model model) {
-
-		return "delete";
 	}
 
 	@RequestMapping(value = "/delete.ws", method = RequestMethod.POST)
@@ -82,7 +71,9 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/content.ws", method = RequestMethod.GET)
-	public String content(Locale locale, Model model) {
+	public String content(Locale locale, Model model, @RequestParam int id) {
+		List<boardDTO> list = bservice.selectOne(id);
+		model.addAttribute("list", list);
 
 		return "content";
 	}
