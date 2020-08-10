@@ -56,6 +56,13 @@ public class HomeController {
 		return "redirect:select.ws";
 	}
 
+	@RequestMapping(value = "/update.ws", method = RequestMethod.GET)
+	public String update(Locale locale, Model model, @RequestParam int id) {
+		List<boardDTO> list = bservice.selectOne(id);
+		model.addAttribute("list", list);
+		return "update";
+	}
+
 	@RequestMapping(value = "/update.ws", method = RequestMethod.POST)
 	public String updatepost(Locale locale, Model model, boardDTO bdto) {
 		bservice.update(bdto);

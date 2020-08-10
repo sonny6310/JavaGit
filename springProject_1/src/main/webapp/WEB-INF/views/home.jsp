@@ -8,6 +8,7 @@
 <body>
 	<%@ include file="header.jsp"%>
 	<div class="container">
+		<h2 style="margin: 0 0 1em 0;">HOME</h2>
 		<p>The time on the server is ${serverTime}.</p>
 	</div>
 </body>

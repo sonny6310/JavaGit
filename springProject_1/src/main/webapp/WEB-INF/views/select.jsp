@@ -23,6 +23,7 @@ tr.board:hover {
 <body>
 	<%@ include file="header.jsp"%>
 	<div class="container">
+		<h2 style="margin: 0 0 1em 0;">SELECT</h2>
 		<table class="table">
 			<thead>
 				<tr>

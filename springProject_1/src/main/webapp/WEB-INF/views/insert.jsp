@@ -8,6 +8,7 @@
 <body>
 	<%@ include file="header.jsp"%>
 	<div class="container">
+		<h2 style="margin: 0 0 1em 0;">INSERT</h2>
 		<form method="post" action="insert.ws">
 			<div class="input-group">
 				<span class="input-group-addon">제목</span> <input id="title" type="text" class="form-control" name="title" placeholder="제목">
