@@ -1,7 +1,11 @@
 package com.org;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import com.org.cloud.CloudDAO;
 import com.org.cloud.CloudDTO;
@@ -210,6 +217,54 @@ public class Servlet extends HttpServlet {
 				}
 			} catch (Exception e) {
 
+			}
+		} else if (url.equals("/callback.ws")) {
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/callback.jsp");
+			rd.forward(request, response);
+		} else if (url.equals("/info.ws")) {
+			// 세션 얻기
+			HttpSession session = request.getSession();
+
+			String token = (String) session.getAttribute("access_token");// 네이버 로그인 접근 토큰;
+			String header = "Bearer " + token; // Bearer 다음에 공백 추가
+			try {
+				String apiURL = "https://openapi.naver.com/v1/nid/me";
+				URL url1 = new URL(apiURL);
+				HttpURLConnection con = (HttpURLConnection) url1.openConnection();
+				con.setRequestMethod("GET");
+				con.setRequestProperty("Authorization", header);
+				int responseCode = con.getResponseCode();
+				BufferedReader br;
+				if (responseCode == 200) { // 정상 호출
+					br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				} else { // 에러 발생
+					br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+				}
+				String inputLine;
+				StringBuffer response1 = new StringBuffer();
+				while ((inputLine = br.readLine()) != null) {
+					response1.append(inputLine);
+				}
+				br.close();
+
+				System.out.println(response1.toString());
+
+				JSONParser parser = new JSONParser();
+
+				JSONObject result = (JSONObject) parser.parse(response1.toString());
+
+				((JSONObject) result.get("response")).get("email");
+				
+//				String id = (String) ((JSONObject) result.get("response")).get("id");
+				String email = (String) ((JSONObject) result.get("response")).get("email");
+//				String name = (String) ((JSONObject) result.get("response")).get("name");
+
+				session.setAttribute("signedUser", email);
+//				session.setAttribute("name", name);
+
+				response.sendRedirect("index.ws");
+			} catch (Exception e) {
+				System.out.println(e);
 			}
 		}
 	}

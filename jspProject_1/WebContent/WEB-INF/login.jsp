@@ -1,3 +1,6 @@
+<%@page import="java.math.BigInteger"%>
+<%@page import="java.security.SecureRandom"%>
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
@@ -15,10 +18,12 @@
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
 <script type="text/javascript">
-	if (<%=session.getAttribute("signedUser") != null%>) {
+	if (
+<%=session.getAttribute("signedUser") != null%>
+	) {
 		alert("이미 로그인 중 입니다");
 		window.location = "index.ws";
-	} 
+	}
 </script>
 </head>
 <body class="is-preload">
@@ -57,13 +62,26 @@
 				<div class="inner">
 					<div class="fields" style="width: 50%; margin-left: 30%;">
 						<div class="field half">
-							<label for="id">아이디</label> <input style="width: 90%;" type="text" name="id" id="id" autocomplete="off"/>
+							<label for="id">아이디</label> <input style="width: 90%;" type="text" name="id" id="id" autocomplete="off" />
 						</div>
 						<div class="field half">
-							<label for="pw">비밀번호</label> <input style="width: 90%;" type="password" name="pw" id="pw" autocomplete="off"/>
+							<label for="pw">비밀번호</label> <input style="width: 90%;" type="password" name="pw" id="pw" autocomplete="off" />
 						</div>
-						<div style="margin-top: 17px;">
+						<div style="margin-top: 17px; margin-bottom: 15px;">
 							<input type="submit" value="로그인" class="primary" />
+						</div>
+						<div>
+							<%
+								String clientId = "Quz0SQXgpUE1GIFObj0j";//애플리케이션 클라이언트 아이디값";
+								String redirectURI = URLEncoder.encode("http://localhost:10030/jspProject_1/callback.ws", "UTF-8");
+								SecureRandom random = new SecureRandom();
+								String state = new BigInteger(130, random).toString();
+								String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+								apiURL += "&client_id=" + clientId;
+								apiURL += "&redirect_uri=" + redirectURI;
+								apiURL += "&state=" + state;
+								session.setAttribute("state", state);
+							%><a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
 						</div>
 					</div>
 				</div>
