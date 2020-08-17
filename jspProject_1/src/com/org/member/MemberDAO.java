@@ -35,6 +35,28 @@ public class MemberDAO {
 		}
 		return x;
 	}
+	
+	public int registNaver(MemberDTO mDTO) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int x = 0;
+		
+		try {
+			conn = DataSource.getConnection();
+			pstmt = conn.prepareStatement("insert into CloudMemberNaver(id,name,email) values (?,?,?)");
+			pstmt.setString(1, mDTO.getId());
+			pstmt.setString(2, mDTO.getName());
+			pstmt.setString(3, mDTO.getEmail());
+			pstmt.executeUpdate();
+			x = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return x;
+		} finally {
+			DataSource.doClose(null, pstmt, conn);
+		}
+		return x;
+	}
 
 	public int login(String id, String pw) {
 		Connection conn = null;

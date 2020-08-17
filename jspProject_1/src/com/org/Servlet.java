@@ -255,14 +255,26 @@ public class Servlet extends HttpServlet {
 
 				((JSONObject) result.get("response")).get("email");
 				
-//				String id = (String) ((JSONObject) result.get("response")).get("id");
+				String id = (String) ((JSONObject) result.get("response")).get("id");
 				String email = (String) ((JSONObject) result.get("response")).get("email");
-//				String name = (String) ((JSONObject) result.get("response")).get("name");
+				String name = (String) ((JSONObject) result.get("response")).get("name");
+				
+				int x = 0;
 
-				session.setAttribute("signedUser", email);
-//				session.setAttribute("name", name);
+				MemberDTO mDTO = new MemberDTO(id, null, name, email);
+				x = mDAO.registNaver(mDTO);
 
-				response.sendRedirect("index.ws");
+				if (x == 1) {
+					session.setAttribute("signedUser", id);
+
+					response.sendRedirect("index.ws");
+				} else {
+					response.setContentType("text/html;charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>alert('로그인에 실패하였습니다'); history.go(-2); </script>");
+					out.flush();
+					out.close();
+				}
 			} catch (Exception e) {
 				System.out.println(e);
 			}
